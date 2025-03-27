@@ -1,0 +1,15 @@
+spring:
+  config:
+    activate:
+      on-profile: "api"
+
+google:
+  gemini-baseurl: ${GEMINI_BASEURL}
+  api-key: ${GEMINI_API_KEY}
+
+spotify:
+  client-id: ${SPOTIFY_CLIENT_ID}
+  client-secret: ${SPOTIFY_CLIENT_SECRET}
+
+youtube:
+  api-key: ${YOUTUBE_API_KEY}

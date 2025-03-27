@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: "local"
+    group:
+      local: "local"
+      dev: "dev"
+    include:
+      - datasource
+      - security
+      - redis
+      - firebase
+      - api

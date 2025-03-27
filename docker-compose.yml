@@ -1,0 +1,58 @@
+services:
+  mysql:
+    image: mysql:8-oracle
+    container_name: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 5s
+      retries: 10
+    networks:
+      - app-network
+
+  spring-server:
+    image: ht3064/spring-server:latest
+    container_name: spring-server
+    hostname: spring-server
+    depends_on:
+      mysql:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    networks:
+      - app-network
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    environment:
+      - TZ=Asia/Seoul
+    networks:
+      - app-network
+
+  react:
+    image: jaehongpark04/syncfit-react:latest
+    platform: linux/amd64
+    container_name: react
+    ports:
+      - "5173:80"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
