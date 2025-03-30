@@ -1,12 +1,13 @@
 spring:
+  application:
+    name: user-service
+  config:
+    import: optional:configserver:http://127.0.0.1:8888/
   profiles:
-    active: "local"
-    group:
-      local: "local"
-      dev: "dev"
+    active: local
     include:
+      - redis
       - datasource
       - security
-      - redis
-      - firebase
-      - api
+      - openfeign
+      - eureka

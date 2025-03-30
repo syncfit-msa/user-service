@@ -1,6 +1,5 @@
 package com.amcamp.domain.member.application;
 
-import com.amcamp.domain.auth.dao.RefreshTokenRepository;
 import com.amcamp.domain.member.domain.Member;
 import com.amcamp.domain.member.dto.response.MemberInfoResponse;
 import com.amcamp.global.util.MemberUtil;
@@ -14,14 +13,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberService {
 
     private final MemberUtil memberUtil;
-    private final RefreshTokenRepository refreshTokenRepository;
+//    private final RefreshTokenRepository refreshTokenRepository;
 
-    public void logoutMember() {
-        Member currentMember = memberUtil.getCurrentMember();
-        refreshTokenRepository
-                .findById(currentMember.getId())
-                .ifPresent(refreshTokenRepository::delete);
-    }
+//    public void logoutMember() {
+//        Member currentMember = memberUtil.getCurrentMember();
+//        refreshTokenRepository
+//                .findById(currentMember.getId())
+//                .ifPresent(refreshTokenRepository::delete);
+//    }
 
     @Transactional(readOnly = true)
     public MemberInfoResponse getMemberInfo() {

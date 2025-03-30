@@ -1,7 +1,0 @@
-spring:
-  config:
-    activate:
-      on-profile: "firebase"
-firebase:
-  config-file: ${FIREBASE_SERVICE_ACCOUNT}
-  bucket: ${FIREBASE_BUCKET}
