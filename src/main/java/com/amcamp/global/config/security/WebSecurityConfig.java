@@ -43,6 +43,8 @@ public class WebSecurityConfig {
                                 .hasRole("ADMIN")
                                 .requestMatchers("/**")
                                 .permitAll()
+                                .requestMatchers("/internal/**")
+                                .permitAll()
                                 .anyRequest()
                                 .authenticated());
 
