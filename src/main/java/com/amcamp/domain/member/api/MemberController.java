@@ -18,11 +18,11 @@ public class MemberController {
     private final MemberService memberService;
     private final CookieUtil cookieUtil;
 
-//    @PostMapping("/logout")
-//    public ResponseEntity<Void> memberLogout() {
-//        memberService.logoutMember();
-//        return ResponseEntity.ok().headers(cookieUtil.deleteRefreshTokenCookie()).build();
-//    }
+    @PostMapping("/logout")
+    public ResponseEntity<Void> memberLogout() {
+        memberService.logoutMember();
+        return ResponseEntity.ok().headers(cookieUtil.deleteRefreshTokenCookie()).build();
+    }
 
     @GetMapping("/me")
     public MemberInfoResponse memberInfo() {
