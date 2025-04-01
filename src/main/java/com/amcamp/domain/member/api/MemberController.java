@@ -5,10 +5,7 @@ import com.amcamp.domain.member.dto.response.MemberInfoResponse;
 import com.amcamp.global.util.CookieUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,13 +16,13 @@ public class MemberController {
     private final CookieUtil cookieUtil;
 
     @PostMapping("/logout")
-    public ResponseEntity<Void> memberLogout() {
-        memberService.logoutMember();
+    public ResponseEntity<Void> memberLogout(@RequestHeader("X-Member-Id") String memberId) {
+        memberService.logoutMember(Long.parseLong(memberId));
         return ResponseEntity.ok().headers(cookieUtil.deleteRefreshTokenCookie()).build();
     }
 
     @GetMapping("/me")
-    public MemberInfoResponse memberInfo() {
-        return memberService.getMemberInfo();
+    public MemberInfoResponse memberInfo(@RequestHeader("X-Member-Id") String memberId) {
+        return memberService.getMemberInfo(Long.parseLong(memberId));
     }
 }
