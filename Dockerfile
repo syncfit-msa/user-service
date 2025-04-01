@@ -1,9 +1,4 @@
-FROM gradle:8.12.1-jdk17 AS builder
+FROM openjdk:17-ea-11-jdk-slim
 WORKDIR /app
-COPY --chown=gradle:gradle . .
-RUN gradle build --no-daemon -x test
-
-FROM openjdk:17-jdk-slim
-
-COPY --from=builder /app/build/libs/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+COPY build/libs/syncfit-0.0.1-SNAPSHOT.jar user-service.jar
+ENTRYPOINT ["java", "-jar", "user-service.jar"]
