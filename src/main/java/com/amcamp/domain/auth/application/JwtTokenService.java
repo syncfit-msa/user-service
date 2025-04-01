@@ -27,18 +27,18 @@ public class JwtTokenService {
         return jwtUtil.generateAccessToken(memberId, memberRole);
     }
 
-    public RefreshTokenDto createRefreshTokenDto(Long memberId) {
-        RefreshTokenDto refreshTokenDto = jwtUtil.generateRefreshTokenDto(memberId);
-        RefreshToken refreshToken =
-                RefreshToken.builder()
-                        .memberId(memberId)
-                        .token(refreshTokenDto.refreshTokenValue())
-                        .ttl(refreshTokenDto.ttl())
-                        .build();
-        refreshTokenRepository.save(refreshToken);
-
-        return refreshTokenDto;
-    }
+//    public RefreshTokenDto createRefreshTokenDto(Long memberId) {
+//        RefreshTokenDto refreshTokenDto = jwtUtil.generateRefreshTokenDto(memberId);
+//        RefreshToken refreshToken =
+//                RefreshToken.builder()
+//                        .memberId(memberId)
+//                        .token(refreshTokenDto.refreshTokenValue())
+//                        .ttl(refreshTokenDto.ttl())
+//                        .build();
+//        refreshTokenRepository.save(refreshToken);
+//
+//        return refreshTokenDto;
+//    }
 
     public String createRefreshToken(Long memberId) {
         String token = jwtUtil.generateRefreshToken(memberId);
@@ -52,14 +52,14 @@ public class JwtTokenService {
 
         return token;
     }
-
-    public AccessTokenDto retrieveAccessToken(String accessTokenValue) {
-        try {
-            return jwtUtil.parseAccessToken(accessTokenValue);
-        } catch (Exception e) {
-            return null;
-        }
-    }
+//
+//    public AccessTokenDto retrieveAccessToken(String accessTokenValue) {
+//        try {
+//            return jwtUtil.parseAccessToken(accessTokenValue);
+//        } catch (Exception e) {
+//            return null;
+//        }
+//    }
 
     public RefreshTokenDto retrieveRefreshToken(String refreshTokenValue) {
         RefreshTokenDto refreshTokenDto = parseRefreshToken(refreshTokenValue);

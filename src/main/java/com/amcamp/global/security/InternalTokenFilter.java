@@ -13,15 +13,12 @@ import java.io.IOException;
 
 @Component
 @RequiredArgsConstructor
-@Slf4j
 public class InternalTokenFilter implements HandlerInterceptor {
 
     private final InternalTokenProperties internalTokenProperties;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
-        log.info(String.valueOf(internalTokenProperties.token()));
-        log.info(String.valueOf(request.getHeader("X-Internal-Token")));
         String token = request.getHeader("X-Internal-Token");
         if (!internalTokenProperties.token().equals(token)) {
             response.setStatus(HttpStatus.FORBIDDEN.value());
