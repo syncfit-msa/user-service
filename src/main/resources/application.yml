@@ -7,7 +7,7 @@ spring:
   application:
     name: user-service
   profiles:
-    active: local
+    active: prod
     include:
       - redis
       - datasource
